@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy New Year from Badr Nejaa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      overflow: hidden;
+    }
+    #fireworks {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .message {
+      animation: pulse 2s infinite;
+    }
+    .name {
+      background: linear-gradient(45deg, #ff00ff, #00ffff, #ff00ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradient 5s ease infinite;
+      background-size: 200% 200%;
+    }
+    .new-year {
+      animation: bounce 1s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+      }
+    }
+    @keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+    .snowflake {
+      color: #fff;
+      font-size: 1em;
+      font-family: Arial, sans-serif;
+      text-shadow: 0 0 5px #000;
+    }
+    @-webkit-keyframes snowflakes-fall{0%{top:-10%}100%{top:100%}}
+    @-webkit-keyframes snowflakes-shake{0%,100%{-webkit-transform:translateX(0);transform:translateX(0)}50%{-webkit-transform:translateX(80px);transform:translateX(80px)}}
+    @keyframes snowflakes-fall{0%{top:-10%}100%{top:100%}}
+    @keyframes snowflakes-shake{0%,100%{transform:translateX(0)}50%{transform:translateX(80px)}}
+    .snowflake{position:fixed;top:-10%;z-index:9999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default;-webkit-animation-name:snowflakes-fall,snowflakes-shake;-webkit-animation-duration:10s,3s;-webkit-animation-timing-function:linear,ease-in-out;-webkit-animation-iteration-count:infinite,infinite;-webkit-animation-play-state:running,running;animation-name:snowflakes-fall,snowflakes-shake;animation-duration:10s,3s;animation-timing-function:linear,ease-in-out;animation-iteration-count:infinite,infinite;animation-play-state:running,running}
+    .snowflake:nth-of-type(0){left:1%;-webkit-animation-delay:0s,0s;animation-delay:0s,0s}
+    .snowflake:nth-of-type(1){left:10%;-webkit-animation-delay:1s,1s;animation-delay:1s,1s}
+    .snowflake:nth-of-type(2){left:20%;-webkit-animation-delay:6s,.5s;animation-delay:6s,.5s}
+    .snowflake:nth-of-type(3){left:30%;-webkit-animation-delay:4s,2s;animation-delay:4s,2s}
+    .snowflake:nth-of-type(4){left:40%;-webkit-animation-delay:2s,2s;animation-delay:2s,2s}
+    .snowflake:nth-of-type(5){left:50%;-webkit-animation-delay:8s,3s;animation-delay:8s,3s}
+    .snowflake:nth-of-type(6){left:60%;-webkit-animation-delay:6s,2s;animation-delay:6s,2s}
+    .snowflake:nth-of-type(7){left:70%;-webkit-animation-delay:2.5s,1s;animation-delay:2.5s,1s}
+    .snowflake:nth-of-type(8){left:80%;-webkit-animation-delay:1s,0s;animation-delay:1s,0s}
+    .snowflake:nth-of-type(9){left:90%;-webkit-animation-delay:3s,1.5s;animation-delay:3s,1.5s}
+    .snowflake:nth-of-type(10){left:25%;-webkit-animation-delay:2s,0s;animation-delay:2s,0s}
+    .snowflake:nth-of-type(11){left:65%;-webkit-animation-delay:4s,2.5s;animation-delay:4s,2.5s}
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gradient-to-b from-purple-900 via-blue-900 to-black">
+  <div class="snowflakes" aria-hidden="true">
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+  </div>
+
+  <div class="text-center z-10">
+    <h1 class="text-4xl md:text-6xl font-bold message mb-4">
+      <span class="name">Badr Nejaa</span> <span id="wishes">wishes you</span>
+    </h1>
+    <p class="text-3xl md:text-5xl mt-4 message new-year font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500">
+      <span id="happy-new-year">a Happy New Year 2025!</span>
+    </p>
+    <p class="text-xl md:text-2xl mt-6 message">
+      <span id="full-of">Full of happiness and success!</span>
+    </p>
+  </div>
+  
+  <canvas id="fireworks"></canvas>
+
+  <script>
+    const canvas = document.getElementById('fireworks');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+
+    class Particle {
+      constructor(x, y, color, velocity) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.velocity = velocity;
+        this.alpha = 1;
+      }
+
+      draw() {
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+
+      update() {
+        this.x += this.velocity.x;
+        this.y += this.velocity.y;
+        this.alpha -= 0.01;
+      }
+    }
+
+    function createFirework(x, y) {
+      const colors = ['#ff0000', '#ff8c00', '#ffd700', '#00ff00', '#00ffff', '#0000ff', '#ff00ff'];
+      for (let i = 0; i < 50; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 4 + 2;
+        particles.push(new Particle(
+          x,
+          y,
+          colors[Math.floor(Math.random() * colors.length)],
+          {
+            x: Math.cos(angle) * speed,
+            y: Math.sin(angle) * speed,
+          }
+        ));
+      }
+    }
+
+    function animate() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach((particle, i) => {
+        if (particle.alpha <= 0) {
+          particles.splice(i, 1);
+        } else {
+          particle.update();
+          particle.draw();
+        }
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    function randomFireworks() {
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height;
+      createFirework(x, y);
+    }
+
+    setInterval(randomFireworks, 800);
+    animate();
+
+    // Translations
+    const translations = {
+      wishes: {
+        en: "wishes you",
+        ar: "يتمنى لك",
+        fr: "vous souhaite"
+      },
+      happyNewYear: {
+        en: "a Happy New Year 2025",
+        ar: "سنة جديدة سعيدة2025",
+        fr: "une Bonne Année 2025 "
+      },
+      fullOf: {
+        en: "Full of happiness and success",
+        ar: "مليئة بالسعادة والنجاح",
+        fr: "Pleine de bonheur et de succès"
+      }
+    };
+
+    const elements = {
+      wishes: document.getElementById('wishes'),
+      happyNewYear: document.getElementById('happy-new-year'),
+      fullOf: document.getElementById('full-of')
+    };
+
+    const languages = ['en', 'ar', 'fr'];
+    let currentLang = 0;
+
+    function updateTranslations() {
+      const lang = languages[currentLang];
+      elements.wishes.textContent = translations.wishes[lang];
+      elements.happyNewYear.textContent = translations.happyNewYear[lang];
+      elements.fullOf.textContent = translations.fullOf[lang];
+
+      currentLang = (currentLang + 1) % languages.length;
+    }
+
+    setInterval(updateTranslations, 3000); // Change language every 3 seconds
+  </script>
+</body>
+</html>
+
